@@ -4,4 +4,12 @@
 # Asegúrese de retornar un valor de salida acorde a la situación.
 # Puede que necesite modificar el archivo Dockerfile.
 
-echo Chequeo de Internet no implementado. && exit 1
+ping -c 1 google.com >/dev/null
+if [ $? -eq 0 ]
+then
+    echo Joyita
+    exit 0
+else
+    echo No hay
+    exit 1
+fi
