@@ -7,9 +7,8 @@
 ping -c 1 google.com >/dev/null
 if [ $? -eq 0 ]
 then
-    echo Joyita
     exit 0
 else
-    echo No hay
+    echo No hay internet
     exit 1
 fi
