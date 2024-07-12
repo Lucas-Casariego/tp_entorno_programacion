@@ -5,4 +5,10 @@
 # El nombre del archivo deberá ser su suma de verificación y debe terminar en .jpg
 # Asegúrese de devolver un valor de salida acorde a la situación.
 
-echo Descarga de imágenes de internet no implementada. && exit 1
+./internet.sh
+
+if [ $? -eq 0 ]; then   
+    echo "Hay internet, continuando con la descarga"
+    # implementación de descarga
+else
+    exit 1
