@@ -8,5 +8,6 @@ RUN apt install -y iputils-ping
 ENV TERM=xterm
 ENV COLORTERM=24bit
 COPY ["src/", "/app/"]
+COPY ["imagenes/", "/imagenes/"]
 WORKDIR /app
 ENTRYPOINT ["/app/main.sh"]
