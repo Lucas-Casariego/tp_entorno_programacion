@@ -6,7 +6,7 @@
 # Asegúrese de devolver un valor de salida acorde a la situación.
 
 CLASE="$1"
-echo $CLASE
+
 ./internet.sh
 
 if [ $? -ne 0 ]; then   
