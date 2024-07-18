@@ -9,39 +9,59 @@
 #
 # Asegúrese de devolver un valor de salida acorde a la situación.
 
-# Ruta al archivo de configuración de YOLO
-CONFIG_FILE="yolov3.cfg"
-WEIGHTS_FILE="yolov3.weights"
-NAMES_FILE="coco.names"
 
-# Verificamos si los archivos necesarios existen
-if [[ ! -f "$CONFIG_FILE" || ! -f "$WEIGHTS_FILE" || ! -f "$NAMES_FILE" ]]; then
-  echo "Archivos de configuración de YOLO no encontrados." && exit 1
+# Script para etiquetar imágenes utilizando YOLO
+#!/bin/bash
+
+# Directorio de imágenes
+directorio_imagenes="/imagenes"
+
+# Verificación de existencia del directorio
+if [ ! -d "$directorio_imagenes" ]; then
+    echo "El directorio $directorio_imagenes no existe."
+    exit 1
 fi
 
-# Ruta a la carpeta de imágenes
-IMAGE_DIR="imagenes"
+for imagen in "$directorio_imagenes"/*.jpg; do
+    echo -e "imagen: $imagen\n\n" 
+    output=$(yolo predict source="$imagen")
+    echo $output
 
-# Verificamos si la carpeta de imágenes existe
-if [[ ! -d "$IMAGE_DIR" ]]; then
-  echo "Carpeta de imágenes no encontrada." && exit 1
-fi
-
-# Iteramos sobre cada archivo .jpg en la carpeta de imágenes
-for image in "$IMAGE_DIR"/*.jpg; do
-  if [[ -f "$image" ]]; then
-    output=$(darknet detect "$CONFIG_FILE" "$WEIGHTS_FILE" "$image")
-    
-    # Extraer etiquetas del resultado
-    labels=$(echo "$output" | grep "Objects:" -A 999 | grep -v "Objects:" | grep -v "Enter" | awk '{print $2}' | sort | uniq -c | awk '{print $1, $2}' | tr '\n' ', ' | sed 's/, $//')
-
-    if [[ -n "$labels" ]]; then
-      # Creamos el archivo .tag con las etiquetas
-      echo "$labels" > "${image%.jpg}.tag"
-    else
-      echo "No se encontraron etiquetas para $image."
-    fi
-  fi
 done
+
+# Procesar cada imagen en el directorio
+# for imagen in "$directorio_imagenes"/*.jpg; do
+#     # Nombre del archivo sin extensión
+#     nombre=$(basename "$imagen" .jpg)
+
+#     # Comando YOLO para etiquetar la imagen
+#     output=$(yolo predict source="$imagen")
+
+#     echo "$output"
+
+#     # Comprobación de éxito del comando YOLO
+#     if [ $? -ne 0 ]; then
+#         echo "Error al etiquetar la imagen $imagen."
+#         continue
+#     fi
+
+#     # Procesar la salida del comando YOLO
+#     if echo "$output" | grep -q "(no detections)"; then
+#         echo "no_detections" > "$directorio_imagenes/${nombre}.tag"
+#     else
+#         # Extraer etiquetas de la salida
+#         etiquetas=$(echo "$output" | grep -oP "(?<=\d{3,4}x\d{3,4} ).*" | sed 's/[0-9]\+ //g' | sed 's/ ms.*//')
+        
+#         # Formatear las etiquetas
+#         etiquetas=$(echo "$etiquetas" | tr ' ' ',')
+
+#         # Eliminar la coma final si existe
+#         etiquetas=$(echo "$etiquetas" | rev | cut -c 2- | rev)
+
+#         echo "$etiquetas" > "$directorio_imagenes/${nombre}.tag"
+#     fi
+
+#     echo "Etiquetado exitoso. Archivo ${nombre}.tag generado."
+# done
 
 exit 0
