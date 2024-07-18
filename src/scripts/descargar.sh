@@ -6,14 +6,21 @@
 # Asegúrese de devolver un valor de salida acorde a la situación.
 
 CLASE="$1"
-
+echo $CLASE
 ./internet.sh
 
 if [ $? -ne 0 ]; then   
     exit 1
 fi    
 
-LINK_IMAGENES="https://picsum.photos/512"
+if [ $# -eq 1 ]; then 
+    LINK_IMAGENES="https://loremflickr.com/512/512/$CLASE"
+else
+    LINK_IMAGENES="https://loremflickr.com/512/512"
+fi
+
+echo $LINK_IMAGENES
+
 TEMP_NAME="temp_name.jpg"
 curl -s -L "$LINK_IMAGENES" -o "$TEMP_NAME"
 if [ $? -ne 0 ]; then
