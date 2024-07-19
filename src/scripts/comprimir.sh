@@ -27,5 +27,3 @@ if [ $? -eq 0 ]; then
 else
   echo "Error durante la generación de la suma de verificación." && exit 1
 fi
-
-echo Módulo de compresión no implementado. && exit 1
