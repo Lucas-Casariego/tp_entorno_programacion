@@ -7,7 +7,7 @@
 
 CLASE="$1"
 
-./internet.sh
+/app/scripts/internet.sh
 
 if [ $? -ne 0 ]; then   
     exit 1
@@ -18,8 +18,6 @@ if [ $# -eq 1 ]; then
 else
     LINK_IMAGENES="https://loremflickr.com/512/512"
 fi
-
-echo $LINK_IMAGENES
 
 TEMP_NAME="temp_name.jpg"
 curl -s -L "$LINK_IMAGENES" -o "$TEMP_NAME"
