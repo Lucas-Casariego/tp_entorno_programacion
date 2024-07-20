@@ -3,7 +3,7 @@
 # Debe preguntarle al usuario que etiqueta desea buscar y mostrar por
 # pantalla todas las imágenes que tengan esa etiqueta.
 
-DIR_IMAGES="/imagenes"
+DIR_IMAGES="/imagenes"  # Asegúrate de actualizar este directorio según tu configuración
 
 # Verificar si el directorio de imágenes existe
 if [ ! -d "$DIR_IMAGES" ]; then
