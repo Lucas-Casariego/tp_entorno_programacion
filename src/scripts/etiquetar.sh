@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Este script trabaja sobre archivos de la carpeta "imagenes" que terminan en .jpg,
+# Este script trabaja sobre archivos de la carpeta actual que terminan en .jpg,
 # clasificándolos usando YOLO:
 #
 # Debe crearse un archivo con el mismo nombre que la imagen, pero extensión .tag
