@@ -2,7 +2,7 @@
 INCLUDE+ .Dockerfile.base
 
 # Instalar los programas necesarios
-RUN apt install -y iputils-ping
+RUN apt install -y iputils-ping curl
 
 # Configuracion de la aplicación
 ENV TERM=xterm
