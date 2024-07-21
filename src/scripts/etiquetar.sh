@@ -9,15 +9,6 @@
 #
 # Asegúrese de devolver un valor de salida acorde a la situación.
 
-
-DIR_IMAGES="/imagenes"
-
-if [ ! -d "$DIR_IMAGES" ]; then
-    echo "El directorio $DIR_IMAGES no existe."
-    exit 1
-fi
-
-
 for image in *.jpg; do
 
     tagfile="${image%.jpg}.tag"
