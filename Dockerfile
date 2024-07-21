@@ -2,7 +2,7 @@
 INCLUDE+ .Dockerfile.base
 
 # Instalar los programas necesarios
-RUN apt install -y iputils-ping curl
+RUN apt install -y iputils-ping curl jp2a
 
 # Configuracion de la aplicación
 ENV TERM=xterm
