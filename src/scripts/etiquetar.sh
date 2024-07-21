@@ -9,4 +9,20 @@
 #
 # Asegúrese de devolver un valor de salida acorde a la situación.
 
-echo Módulo de etiquetado no implementado. && exit 1
+for image in *.jpg; do
+
+    tagfile="${image%.jpg}.tag"
+
+    output=$(yolo predict model=yolov8l.pt source="$image")
+
+    # Etraer tags de la imagen
+    labels=$(echo "$output" | grep -oP '\d+x\d+ \K((?:\d+ \w+(?: \w+)*)(?:, \d+ (?:\w+(?: \w+)*))*)')
+    
+    if [ -z "$labels" ]; then
+        echo "no_detections" > "$tagfile"
+    else
+        echo "$labels" > "$tagfile"
+    fi
+done
+
+exit 0
