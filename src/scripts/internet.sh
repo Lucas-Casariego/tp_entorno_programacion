@@ -4,7 +4,7 @@
 # Asegúrese de retornar un valor de salida acorde a la situación.
 # Puede que necesite modificar el archivo Dockerfile.
 
-ping -c 1 google.com >/dev/null
+ping -c 1 google.com >/dev/null 2>&1
 if [ $? -eq 0 ]
 then
     exit 0

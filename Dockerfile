@@ -10,3 +10,4 @@ ENV COLORTERM=24bit
 COPY ["src/", "/app/"]
 WORKDIR /app
 ENTRYPOINT ["/app/main.sh"]
+
